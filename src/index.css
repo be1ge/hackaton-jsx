@@ -1,4 +1,11 @@
 :root {
-  
+  --text-color: #FFFFFF;
+  --primary-color: rgb(158, 153, 255);
+  --primary-background-color: rgba(158, 153, 255, 0.5);
 }
 
+body {
+    /* background: url('./1920836.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
