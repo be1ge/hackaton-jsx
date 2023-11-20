@@ -17,13 +17,13 @@ function App() {
     }
 
     function onDropHandler(e) {
-      e.preventDefault();
-      let files = [...e.dataTransfer.files];
-      const formData = new FormData();
-      formData.append('file', files[0]);
-      axios.post('url', formData);
-      console.log(files)
-      setDrag(false);
+        e.preventDefault();
+        let files = [...e.dataTransfer.files];
+        const formData = new FormData();
+        formData.append('file', files[0]);
+        axios.post('url', formData);
+        console.log(files);
+        setDrag(false);
     }
     return (
         <>
@@ -34,12 +34,13 @@ function App() {
                         onDragStart={(e) => dragStartHandler(e)}
                         onDragLeave={(e) => dragLeaveHandler(e)}
                         onDragOver={(e) => dragStartHandler(e)}
-                        onDrop={e => onDropHandler(e)}
+                        onDrop={(e) => onDropHandler(e)}
                     >
                         Отпустите файлы, чтобы загрузить их
                     </div>
                 ) : (
                     <div
+                        className='drop-area'
                         onDragStart={(e) => dragStartHandler(e)}
                         onDragLeave={(e) => dragLeaveHandler(e)}
                         onDragOver={(e) => dragStartHandler(e)}
@@ -48,9 +49,7 @@ function App() {
                     </div>
                 )}
             </div>
-            <HighlightedText>
-
-            </HighlightedText>
+            <HighlightedText></HighlightedText>
         </>
     );
 }
