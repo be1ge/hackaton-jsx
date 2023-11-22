@@ -15,7 +15,6 @@ app.post('/upload', (req, res) => {
   }
 
   const myFile = req.files.file;
-
   myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
     if (err) {
       console.log(err);
