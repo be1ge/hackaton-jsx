@@ -14,13 +14,6 @@ app.post('/upload', (req, res) => {
     return res.status(500).send({ msg: "file is not found" });
   }
 
-  const myFile = req.files.file;
-  myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
-    if (err) {
-      console.log(err);
-      return res.status(500).send({ msg: "Error occurred" });
-    }
-
     // Чтение файла JSON и отправка его содержимого
     fs.readFile(`${__dirname}/public/endpoints.json`, 'utf8', (err, data) => {
       if (err) {
@@ -32,7 +25,6 @@ app.post('/upload', (req, res) => {
       res.send(jsonData);
     });
   });
-});
 
 app.listen(3000, () => {
   console.log('Server is running at port 3000');

@@ -3,7 +3,7 @@ import React from 'react';
 export default function HighlightedText({ endpoints }) {
     // Функция для обработки данных и получения нужных значений
     if (!endpoints) {
-        return null;
+        return <>Loading</>;
     }
     function getTrancribedData(endpoints) {
         const transcribationOutputText =
