@@ -42,35 +42,44 @@ export const FileUpload = () => {
 
     const handleFileUpload = (file) => {
         const formData = new FormData();
-        formData.append('', file);
+        formData.append('fl', file);
 
         axios
-            .post('http://localhost:3000/transcribation', formData)
+            .post(
+                'https://04c0-93-175-29-74.ngrok-free.app/transcribation?user_id=123&file_id=456',
+                formData
+            )
             .then((response) => {
                 console.log('Ответ от /transcribation:', response.data);
                 const transcribationData = JSON.stringify(response.data);
                 localStorage.setItem('transcribationData', transcribationData);
                 setTranscribationData(transcribationData);
+                console.log(typeof response.data);
                 setTimeout(() => {
                     axios
-                        .post('http://localhost:3000/termsExtraction', formData)
+                        // .post('http://localhost:3000/termsExtraction')
+                        .post(
+                            'https://04c0-93-175-29-74.ngrok-free.app/terms_extraction?user_id=123&file_id=456',
+                            formData
+                        )
                         .then((response) => {
                             console.log(
                                 'Ответ от /termsExtraction:',
                                 response.data
                             );
-                            const termsExtractionData = JSON.stringify(
-                                response.data
-                            );
+                            const termsExtractionData = response.data;
                             localStorage.setItem(
                                 'termsExtractionData',
                                 termsExtractionData
                             );
                             setTermsExtractionData(termsExtractionData);
+                            console.log(typeof response.data);
+
                             setTimeout(() => {
                                 axios
                                     .post(
-                                        'http://localhost:3000/termsDescription',
+                                        // 'http:localhost:3000/termsDescription',
+                                        'https://04c0-93-175-29-74.ngrok-free.app/terms_description?user_id=123&file_id=456',
                                         formData
                                     )
                                     .then((response) => {
@@ -79,7 +88,7 @@ export const FileUpload = () => {
                                             response.data
                                         );
                                         const termsDescriptionData =
-                                            JSON.stringify(response.data);
+                                            response.data;
                                         localStorage.setItem(
                                             'termsDescriptionData',
                                             termsDescriptionData
@@ -87,6 +96,7 @@ export const FileUpload = () => {
                                         setTermsDescriptionData(
                                             termsDescriptionData
                                         );
+                                        console.log(typeof response.data);
                                     })
                                     .catch((error) => {
                                         console.error(
@@ -109,11 +119,6 @@ export const FileUpload = () => {
             });
     };
 
-    const resetApp = () => {
-        setDrag(false);
-        setData(null);
-    };
-
     return (
         <>
             {drag ? (
@@ -128,21 +133,39 @@ export const FileUpload = () => {
                 </div>
             ) : termsDescriptionData ? (
                 <div className="app_wrapper">
-                    <HighlightedText data={transcribationData} />
-                    <TermsExtractionData data={termsExtractionData} />
-                    <TermsDescriptionData data={termsDescriptionData} />
+                    <div>
+                        <HighlightedText />
+                    </div>
+                    <div>
+                        <TermsExtractionData />
+                    </div>
+                    <div>
+                        <TermsDescriptionData />
+                    </div>
                 </div>
             ) : termsExtractionData ? (
                 <div className="app_wrapper">
-                    <HighlightedText data={transcribationData} />
-                    <TermsExtractionData data={termsExtractionData} />
-                    <TermsDescriptionData data={termsDescriptionData} />
+                    <div>
+                        <HighlightedText />
+                    </div>
+                    <div>
+                        <TermsExtractionData />
+                    </div>
+                    <div>
+                        <TermsDescriptionData />
+                    </div>
                 </div>
             ) : transcribationData ? (
                 <div className="app_wrapper">
-                    <HighlightedText data={transcribationData} />
-                    <TermsExtractionData data={termsExtractionData} />
-                    <TermsDescriptionData data={termsDescriptionData} />
+                    <div>
+                        <HighlightedText />
+                    </div>
+                    <div>
+                        <TermsExtractionData />
+                    </div>
+                    <div>
+                        <TermsDescriptionData />
+                    </div>
                 </div>
             ) : (
                 <div

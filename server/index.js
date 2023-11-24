@@ -35,9 +35,7 @@ app.post('/termsDescription', (req, res) => {
     );
     const termsDescriptionContent = fs.readFileSync(termsDescriptionFile);
 
-    res.json({
-      termsDescription: JSON.parse(termsDescriptionContent),
-    });
+    res.termsDescriptionContent;
   });
 });
 
@@ -54,9 +52,9 @@ app.post('/termsExtraction', (req, res) => {
     );
 
     const termsExtractionContent = fs.readFileSync(termsExtractionFile);
-
+      console.log(typeof(termsExtractionContent));
     res.json({
-      termsExtraction: JSON.parse(termsExtractionContent),
+      termsExtraction: JSON.stringify(termsExtractionContent),
     });
   });
 });

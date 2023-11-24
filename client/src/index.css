@@ -8,4 +8,6 @@ body {
     /* background: url('./1920836.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100%;
+    max-width: 100%;
 }
