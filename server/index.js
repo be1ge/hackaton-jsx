@@ -1,31 +1,86 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
-const cors = require('cors');
+const multer = require('multer');
+const path = require('path');
 const fs = require('fs');
-
+const cors = require('cors'); // Добавляем пакет cors
 const app = express();
+const port = 3000;
 
-app.use(express.static('public'));
+const uploadFolder = path.join(__dirname, 'public');
+
+// Настраиваем CORS для разрешения запросов с разных доменов и портов
 app.use(cors());
-app.use(fileUpload());
 
-app.post('/upload', (req, res) => {
-  if (!req.files) {
-    return res.status(500).send({ msg: "file is not found" });
-  }
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, uploadFolder);
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 
-    // Чтение файла JSON и отправка его содержимого
-    fs.readFile(`${__dirname}/public/endpoints.json`, 'utf8', (err, data) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).send({ msg: "Error occurred" });
-      }
+const upload = multer({ storage: storage }).any();
 
-      const jsonData = JSON.parse(data);
-      res.send(jsonData);
+app.post('/termsDescription', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Ошибка загрузки файла' });
+    }
+    const termsDescriptionFile = path.join(
+      __dirname,
+      'responses',
+      'terms_description_output.json'
+    );
+    const termsDescriptionContent = fs.readFileSync(termsDescriptionFile);
+
+    res.json({
+      termsDescription: JSON.parse(termsDescriptionContent),
     });
   });
+});
 
-app.listen(3000, () => {
-  console.log('Server is running at port 3000');
+app.post('/termsExtraction', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Ошибка загрузки файла' });
+    }
+    const termsExtractionFile = path.join(
+      __dirname,
+      'responses',
+      'terms_extraction_output.json'
+    );
+
+    const termsExtractionContent = fs.readFileSync(termsExtractionFile);
+
+    res.json({
+      termsExtraction: JSON.parse(termsExtractionContent),
+    });
+  });
+});
+
+app.post('/transcribation', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Ошибка загрузки файла' });
+    }
+    const transcribationFile = path.join(
+      __dirname,
+      'responses',
+      'transcribation_output.json'
+    );
+
+    const transcribationContent = fs.readFileSync(transcribationFile);
+
+    res.json({
+      transcribation: JSON.parse(transcribationContent),
+    });
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Сервер запущен на порту ${port}`);
 });

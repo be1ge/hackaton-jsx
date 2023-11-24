@@ -22,3 +22,9 @@
   color: var(--primary-background-color);
   border-radius: 16px;
 }
+
+.app_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
