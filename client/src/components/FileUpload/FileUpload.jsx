@@ -3,6 +3,7 @@ import axios from 'axios';
 import HighlightedText from '../HighlightedText/HighlightedText';
 import TermsDescriptionData from '../TermsDescriptionData/TermsDescriptionData';
 import TermsExtractionData from '../TermsExtractionData/TermsExtractionData';
+import styles from './FileUpload.module.css'
 
 export const FileUpload = () => {
     const [drag, setDrag] = useState(false);
@@ -136,11 +137,13 @@ export const FileUpload = () => {
                     <div>
                         <HighlightedText />
                     </div>
-                    <div>
-                        <TermsExtractionData />
-                    </div>
-                    <div>
-                        <TermsDescriptionData />
+                    <div className={styles['secondary']}>
+                        <div>
+                            <TermsExtractionData />
+                        </div>
+                        <div>
+                            <TermsDescriptionData />
+                        </div>
                     </div>
                 </div>
             ) : termsExtractionData ? (
@@ -148,11 +151,13 @@ export const FileUpload = () => {
                     <div>
                         <HighlightedText />
                     </div>
-                    <div>
-                        <TermsExtractionData />
-                    </div>
-                    <div>
-                        <TermsDescriptionData />
+                    <div className={styles['secondary']}>
+                        <div>
+                            <TermsExtractionData />
+                        </div>
+                        <div>
+                            <TermsDescriptionData />
+                        </div>
                     </div>
                 </div>
             ) : transcribationData ? (
@@ -160,11 +165,13 @@ export const FileUpload = () => {
                     <div>
                         <HighlightedText />
                     </div>
-                    <div>
-                        <TermsExtractionData />
-                    </div>
-                    <div>
-                        <TermsDescriptionData />
+                    <div className={styles['secondary']}>
+                        <div>
+                            <TermsExtractionData />
+                        </div>
+                        <div>
+                            <TermsDescriptionData />
+                        </div>
                     </div>
                 </div>
             ) : (

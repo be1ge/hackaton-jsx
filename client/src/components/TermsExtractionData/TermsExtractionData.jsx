@@ -1,18 +1,13 @@
 import React from 'react';
+import styles from './TermsExtractionData.module.css';
+
 
 export default function TermsExtractionData() {
-    if (!localStorage.getItem('termsExtractionData')) {
-        return null;
-    }
-    const parse = JSON.parse(localStorage.getItem('termsExtractionData'));
-    const items = Object.entries(parse['terms_info']).map(
-        ([key, value], index) => (
-            <div key={index}>
-                <p value={value}>{key}</p>
-                <p></p>
+    return (
+        <>
+            <div className={styles['thirdary']}>
+                <button onClick={generateDOCX}>Создать конспект</button>
             </div>
-        )
+        </>
     );
-
-    return <>{items}</>;
 }

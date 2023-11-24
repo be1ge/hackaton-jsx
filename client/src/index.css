@@ -1,13 +1,37 @@
 :root {
-  --text-color: #FFFFFF;
-  --primary-color: rgb(114, 107, 253);
-  --primary-background-color: rgba(158, 153, 255, 0.5);
+    --text-color: #ffffff;
+    --primary-color: rgb(114, 107, 253);
+    --primary-background-color: rgba(158, 153, 255, 0.5);
 }
 
+html,
 body {
     /* background: url('./1920836.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
+    overflow-x: hidden;
     width: 100%;
     max-width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #171717 50%, #e32636 50%);
+    color: #FFF;
+  }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    height: 10px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #eeeeee;
+    -webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 10px;
+    background-color: #666;
+    border: 1px solid #eee;
+    -webkit-border-radius: 16px;
 }
