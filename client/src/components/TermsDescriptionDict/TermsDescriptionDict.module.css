@@ -1,0 +1,15 @@
+.glossarium {
+    width: 45vw;
+    height: 40vh;
+    padding: 20px;
+    border-radius: 20px;
+    overflow-y: auto;
+    background: rgba(61, 51, 51, 0.21);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.3px);
+    -webkit-backdrop-filter: blur(180.3px);
+}
+.glossarium-item:not(:nth-child(1)) {
+    margin-top: 20px;
+}

@@ -1,6 +1,6 @@
 @font-face {
     font-family: logo;
-    src: url(../public/Super_Squad_Rus.otf);
+    src: url(/Super_Squad_Rus.otf);
 }
 
 :root {

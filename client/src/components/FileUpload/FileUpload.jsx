@@ -3,7 +3,9 @@ import axios from 'axios';
 import HighlightedText from '../HighlightedText/HighlightedText';
 import TermsDescriptionData from '../TermsDescriptionData/TermsDescriptionData';
 import TermsExtractionData from '../TermsExtractionData/TermsExtractionData';
+import FinalText from '../FinalText/FinalText';
 import styles from './FileUpload.module.css';
+import TermsDescriptionDict from '../TermsDescriptionDict/TermsDescriptionDict';
 
 export const FileUpload = () => {
     const [drag, setDrag] = useState(false);
@@ -16,6 +18,9 @@ export const FileUpload = () => {
     const [termsDescriptionData, setTermsDescriptionData] = useState(
         JSON.parse(localStorage.getItem('termsDescriptionData')) || null
     );
+    const [headings, setHeadings] = useState(
+        JSON.parse(localStorage.getItem('headings')) || null
+    )
     const [loading, setLoading] = useState(false);
 
     const openFileBrowser = () => {
@@ -39,16 +44,13 @@ export const FileUpload = () => {
         e.preventDefault();
         setLoading(true);
     };
-
+    const url = 'https://9fc1-93-175-29-74.ngrok-free.app/';
     const handleFileUpload = (file) => {
         const formData = new FormData();
         formData.append('fl', file);
 
         axios
-            .post(
-                'https://04c0-93-175-29-74.ngrok-free.app/transcribation?user_id=123&file_id=456',
-                formData
-            )
+            .post(url + 'transcribation?user_id=123&file_id=456', formData)
             .then((response) => {
                 console.log('Ответ от /transcribation:', response.data);
                 const transcribationData = JSON.stringify(response.data);
@@ -59,7 +61,7 @@ export const FileUpload = () => {
                     axios
                         // .post('http://localhost:3000/termsExtraction')
                         .post(
-                            'https://04c0-93-175-29-74.ngrok-free.app/terms_extraction?user_id=123&file_id=456',
+                            url + 'terms_extraction?user_id=123&file_id=456',
                             formData
                         )
                         .then((response) => {
@@ -67,7 +69,9 @@ export const FileUpload = () => {
                                 'Ответ от /termsExtraction:',
                                 response.data
                             );
-                            const termsExtractionData = response.data;
+                            const termsExtractionData = JSON.stringify(
+                                response.data
+                            );
                             localStorage.setItem(
                                 'termsExtractionData',
                                 termsExtractionData
@@ -79,7 +83,8 @@ export const FileUpload = () => {
                                 axios
                                     .post(
                                         // 'http:localhost:3000/termsDescription',
-                                        'https://04c0-93-175-29-74.ngrok-free.app/terms_description?user_id=123&file_id=456',
+                                        url +
+                                            'terms_description?user_id=123&file_id=456',
                                         formData
                                     )
                                     .then((response) => {
@@ -88,7 +93,7 @@ export const FileUpload = () => {
                                             response.data
                                         );
                                         const termsDescriptionData =
-                                            response.data;
+                                            JSON.stringify(response.data);
                                         localStorage.setItem(
                                             'termsDescriptionData',
                                             termsDescriptionData
@@ -100,7 +105,8 @@ export const FileUpload = () => {
                                             axios
                                                 .post(
                                                     // 'http:localhost:3000/termsDescription',
-                                                    'https://04c0-93-175-29-74.ngrok-free.app/headings?user_id=123&file_id=456',
+                                                    url +
+                                                        'headings?user_id=123&file_id=456',
                                                     formData
                                                 )
                                                 .then((response) => {
@@ -109,16 +115,20 @@ export const FileUpload = () => {
                                                         response.data
                                                     );
                                                     const headings =
-                                                        response.data;
+                                                        JSON.stringify(
+                                                            response.data
+                                                        );
                                                     localStorage.setItem(
                                                         'headings',
                                                         headings
                                                     );
+                                                    setHeadings(true);
                                                     setTimeout(() => {
                                                         axios
                                                             .post(
                                                                 // 'http:localhost:3000/termsDescription',
-                                                                'https://04c0-93-175-29-74.ngrok-free.app/QA_generation?user_id=123&file_id=456',
+                                                                url +
+                                                                    'QA_generation?user_id=123&file_id=456',
                                                                 formData
                                                             )
                                                             .then(
@@ -128,7 +138,9 @@ export const FileUpload = () => {
                                                                         response.data
                                                                     );
                                                                     const QA_generation =
-                                                                        response.data;
+                                                                        JSON.stringify(
+                                                                            response.data
+                                                                        );
                                                                     localStorage.setItem(
                                                                         'QA_generation',
                                                                         QA_generation
@@ -138,7 +150,8 @@ export const FileUpload = () => {
                                                                             axios
                                                                                 .post(
                                                                                     // 'http:localhost:3000/termsDescription',
-                                                                                    'https://04c0-93-175-29-74.ngrok-free.app/file_generate?user_id=123&file_id=456',
+                                                                                    url +
+                                                                                        'file_generate?user_id=123&file_id=456',
                                                                                     formData
                                                                                 )
                                                                                 .then(
@@ -213,17 +226,31 @@ export const FileUpload = () => {
         <>
             {drag ? (
                 <>
-                <div
-                    className="drop-area"
-                    onDragStart={dragStartHandler}
-                    onDragLeave={dragLeaveHandler}
-                    onDragOver={dragStartHandler}
-                    onDrop={onDropHandler}
-                >
-                    <img src="./public/cloud.svg" alt="" />
+                    <div
+                        className="drop-area"
+                        onDragStart={dragStartHandler}
+                        onDragLeave={dragLeaveHandler}
+                        onDragOver={dragStartHandler}
+                        onDrop={onDropHandler}
+                    >
+                        <img src="./public/cloud.svg" alt="" />
+                    </div>
+                    <h1 className="logo">Pine Forest AI</h1>
+                </>
+            ) : headings ? (
+                <div className="app_wrapper2">
+                    <div>
+                        <FinalText />
+                    </div>
+                    <div className={styles['secondary']}>
+                        <div>
+                            <TermsExtractionData />
+                        </div>
+                        <div>
+                            <TermsDescriptionData />
+                        </div>
+                    </div>
                 </div>
-                    <h1 className='logo'>Pine Forest AI</h1>
-                    </>
             ) : termsDescriptionData ? (
                 <div className="app_wrapper2">
                     <div>
@@ -235,6 +262,7 @@ export const FileUpload = () => {
                         </div>
                         <div>
                             <TermsDescriptionData />
+                            <TermsDescriptionDict />
                         </div>
                     </div>
                 </div>
@@ -267,18 +295,18 @@ export const FileUpload = () => {
                     </div>
                 </div>
             ) : (
-                <div className='app_wrapper'>
-                <div
-                    className="drop-area"
-                    onDragStart={dragStartHandler}
-                    onDragLeave={dragLeaveHandler}
-                    onDragOver={dragStartHandler}
-                    onClick={openFileBrowser}
+                <div className="app_wrapper">
+                    <div
+                        className="drop-area"
+                        onDragStart={dragStartHandler}
+                        onDragLeave={dragLeaveHandler}
+                        onDragOver={dragStartHandler}
+                        onClick={openFileBrowser}
                     >
-                    <img src="./public/cloud.svg" alt="" />
+                        <img src="./public/cloud.svg" alt="" />
+                    </div>
+                    <h1 className="logo">Pine Forest AI</h1>
                 </div>
-                    <h1 className='logo'>Pine Forest AI</h1>
-            </div>
             )}
         </>
     );

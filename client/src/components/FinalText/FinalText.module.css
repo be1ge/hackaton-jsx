@@ -1,0 +1,24 @@
+.transcribation {
+    width: 45vw;
+}
+
+.transcribation textarea {
+    width: 100%;
+    height: 90vh;
+    overflow-x: hidden;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    resize: none;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(61, 51, 51, 0.21);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(17.3px);
+    -webkit-backdrop-filter: blur(180.3px);
+    cursor: pointer;
+}

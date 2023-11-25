@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './TermsDescriptionData.module.css';
+import styles from './TermsDescriptionDict.module.css';
 
-export default function TermsDescriptionData() {
+export default function TermsDescriptionDict() {
   if (!localStorage.getItem('termsDescriptionData')) {
     return null;
   }
 
   const parse = JSON.parse(localStorage.getItem('termsDescriptionData'));
-  const termsDescrFromText = parse['terms_descr_from_text'];
-  const termKey = Object.keys(termsDescrFromText)[0];
-  const termItems = termsDescrFromText[termKey].map(
+  const termsDescrFromDict = parse['terms_descr_from_dict'];
+  const termKey = Object.keys(termsDescrFromDict)[1];
+  const termItems = termsDescrFromDict[termKey].map(
     (item, index) => (
       <div key={index} className={styles['glossarium-item']}>
         <p>{item['descr']}</p>
