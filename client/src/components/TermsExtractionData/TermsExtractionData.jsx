@@ -1,13 +1,32 @@
-import React from 'react';
+import React from "react";
 import styles from './TermsExtractionData.module.css';
 
+const TermsExtractionData = () => {
+  const downloadFile = () => {
+    const file = localStorage.getItem("file_generate");
+    const blob = new Blob([file], { type: "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "file_generate";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
-export default function TermsExtractionData() {
-    return (
-        <>
-            <div className={styles['thirdary']}>
-                <button onClick={generateDOCX}>Создать конспект</button>
-            </div>
-        </>
-    );
-}
+  const file = localStorage.getItem("file_generate");
+
+  return (
+    <div className={styles['thirdary']}>
+      {file ? (
+        <div className="" onClick={downloadFile}>
+          <p>Скачать файл</p>
+        </div>
+      ) : null}
+      <div className="">
+        <p>Pine<br /> Forest <br />&nbsp;&nbsp;&nbsp; AI</p>
+      </div>
+    </div>
+  );
+};
+
+export default TermsExtractionData;

@@ -5,3 +5,6 @@
     width: 45vw;
     justify-content: space-around;
 }
+.logo {
+    position: absolute;
+}

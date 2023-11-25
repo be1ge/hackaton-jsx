@@ -12,7 +12,7 @@ export default function TermsDescriptionData() {
             <div key={index} className={styles['glossarium-item']}>
                 <h4 value={item[0]['descr']}>{item[0]['sentence']}</h4>
                 <p>{item[0]['descr']}</p>
-                <a href={item[0]['link']}>Подробнее</a>
+                <a href={item[0]['link']}>Источник</a>
             </div>
         )
     );

@@ -22,9 +22,22 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin-top: 20%;
+}
+
+.drop-area img {
+  width: 20%;
 }
 
 .app_wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app_wrapper2 {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -32,3 +45,19 @@
   align-items: center;
 }
 
+.logo {
+  position: absolute;
+  top: 10vh;
+  font-family: logo;
+  font-size: 120px;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+}
+
+a:hover {
+  color: #1e1e1e;
+}

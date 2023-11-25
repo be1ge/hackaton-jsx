@@ -1,26 +1,33 @@
 .thirdary {
-    width: 45vw;
-    max-width: 45vw;
+    width: 100%;
     height: 40vh;
     padding: 20px;
     border-radius: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 5vh;
+    position: relative;
+    font-family: logo;
+    font-size: 32px;
+    line-height: normal;
+}
+
+.thirdary div:nth-child(1) {
+    width: 50%;
+    line-height: 40px;
+    border-radius: 15px;
     background: rgba(61, 51, 51, 0.21);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(17.3px);
     -webkit-backdrop-filter: blur(180.3px);
-}
-
-.thirdary div {
-    padding: 10px;
-    margin: 5px;
-    line-height: 40px;
-    border-radius: 15px;
-    background: rgba(61, 51, 51, 0.21);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.thirdary div:hover {
+.thirdary div:nth-child(1):hover {
     background: rgba(126, 0, 0, 0.5);
 }
