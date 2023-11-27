@@ -12,7 +12,7 @@ export default function HighlightedText() {
     return (
       <div className={styles['styled-scrollbars']}>
         <div className={styles['transcribation']}>
-            <textarea spellCheck="false" autoComplete="off" autoCorrect="off" autoCapitalize="off">{items}</textarea>
+            <textarea id="highlightedtext" spellCheck="false" autoComplete="off" autoCorrect="off" autoCapitalize="off">{items}</textarea>
         </div>
       </div>
     );

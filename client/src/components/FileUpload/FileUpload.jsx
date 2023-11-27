@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import HighlightedText from '../HighlightedText/HighlightedText';
 import TermsDescriptionData from '../TermsDescriptionData/TermsDescriptionData';
-import TermsExtractionData from '../TermsExtractionData/TermsExtractionData';
+import TermsExtractionData from '../TermsExtractionData/FileGenerate';
 import FinalText from '../FinalText/FinalText';
 import styles from './FileUpload.module.css';
 import TermsDescriptionDict from '../TermsDescriptionDict/TermsDescriptionDict';
@@ -20,7 +20,7 @@ export const FileUpload = () => {
     );
     const [headings, setHeadings] = useState(
         JSON.parse(localStorage.getItem('headings')) || null
-    )
+    );
     const [loading, setLoading] = useState(false);
 
     const openFileBrowser = () => {
@@ -48,7 +48,6 @@ export const FileUpload = () => {
     const handleFileUpload = (file) => {
         const formData = new FormData();
         formData.append('fl', file);
-
         axios
             .post(url + 'transcribation?user_id=123&file_id=456', formData)
             .then((response) => {
@@ -238,16 +237,22 @@ export const FileUpload = () => {
                     <h1 className="logo">Pine Forest AI</h1>
                 </>
             ) : headings ? (
-                <div className="app_wrapper2">
-                    <div>
-                        <FinalText />
-                    </div>
-                    <div className={styles['secondary']}>
+                <div>
+                    <div className="app_wrapper2">
                         <div>
+                            <FinalText />
+                        </div>
+                        <div className={styles['secondary']}>
+                            <TermsDescriptionData />
+                            <TermsDescriptionDict />
+                        </div>
+                    </div>
+                    <div className="app_wrapper2">
+                        <div className={styles['secondary']}>
                             <TermsExtractionData />
                         </div>
-                        <div>
-                            <TermsDescriptionData />
+                        <div className="">
+                            <FinalText></FinalText>
                         </div>
                     </div>
                 </div>

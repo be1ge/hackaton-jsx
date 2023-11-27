@@ -9,7 +9,8 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(17.3px);
     -webkit-backdrop-filter: blur(180.3px);
+    position: relative;
 }
-.glossarium-item:not(:nth-child(1)) {
-    margin-top: 20px;
+.glossarium-item {
+    padding: 20px 0;
 }

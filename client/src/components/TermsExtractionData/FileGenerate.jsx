@@ -22,9 +22,6 @@ const TermsExtractionData = () => {
           <p>Скачать файл</p>
         </div>
       ) : null}
-      <div className="">
-        <p>Pine<br /> Forest <br />&nbsp;&nbsp;&nbsp; AI</p>
-      </div>
     </div>
   );
 };
