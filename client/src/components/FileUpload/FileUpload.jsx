@@ -6,6 +6,7 @@ import TermsExtractionData from '../TermsExtractionData/FileGenerate';
 import FinalText from '../FinalText/FinalText';
 import styles from './FileUpload.module.css';
 import TermsDescriptionDict from '../TermsDescriptionDict/TermsDescriptionDict';
+import QAForm from '../QA/QAForm';
 
 export const FileUpload = () => {
     const [drag, setDrag] = useState(false);
@@ -144,44 +145,6 @@ export const FileUpload = () => {
                                                                         'QA_generation',
                                                                         QA_generation
                                                                     );
-                                                                    setTimeout(
-                                                                        () => {
-                                                                            axios
-                                                                                .post(
-                                                                                    // 'http:localhost:3000/termsDescription',
-                                                                                    url +
-                                                                                        'file_generate?user_id=123&file_id=456',
-                                                                                    formData
-                                                                                )
-                                                                                .then(
-                                                                                    (
-                                                                                        response
-                                                                                    ) => {
-                                                                                        console.log(
-                                                                                            'Ответ от /file_generate:',
-                                                                                            response.data
-                                                                                        );
-                                                                                        const file_generate =
-                                                                                            response.data;
-                                                                                        localStorage.setItem(
-                                                                                            'file_generate',
-                                                                                            file_generate
-                                                                                        );
-                                                                                    }
-                                                                                )
-                                                                                .catch(
-                                                                                    (
-                                                                                        error
-                                                                                    ) => {
-                                                                                        console.error(
-                                                                                            'Ошибка при запросе на /file_generate:',
-                                                                                            error
-                                                                                        );
-                                                                                    }
-                                                                                );
-                                                                        },
-                                                                        0
-                                                                    );
                                                                 }
                                                             )
                                                             .catch((error) => {
@@ -252,7 +215,7 @@ export const FileUpload = () => {
                             <TermsExtractionData />
                         </div>
                         <div className="">
-                            <FinalText></FinalText>
+                            <QAForm />
                         </div>
                     </div>
                 </div>

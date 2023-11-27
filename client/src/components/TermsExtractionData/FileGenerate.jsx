@@ -1,5 +1,6 @@
 import React from "react";
 import styles from './TermsExtractionData.module.css';
+import QAForm from "../QA/QAForm";
 
 const TermsExtractionData = () => {
   const downloadFile = () => {
@@ -21,7 +22,8 @@ const TermsExtractionData = () => {
         <div className="" onClick={downloadFile}>
           <p>Скачать файл</p>
         </div>
-      ) : null}
+      ) : null
+      }
     </div>
   );
 };
